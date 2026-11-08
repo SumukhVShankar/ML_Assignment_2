@@ -139,13 +139,6 @@ streamlit run app.py
 
 Then open the app, upload `test_data.csv`, and explore the models.
 
-## Deploying on Streamlit Community Cloud
-
-1. Push this repository to GitHub.
-2. Go to <https://streamlit.io/cloud> and sign in with GitHub.
-3. **New app** → select this repo → branch `main` → main file `app.py` → **Deploy**.
-4. Once live, paste the URL into section **e** above.
-
 ## Notes on Reproducibility
 
 - A fixed `random_state = 42` governs the train/test split and all stochastic
