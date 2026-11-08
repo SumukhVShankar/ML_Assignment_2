@@ -98,7 +98,7 @@ The app loads the saved pipelines from `model/` and evaluates the uploaded
 data directly. **It never retrains** — every number is the saved model applied
 to your test CSV.
 
-> **Live App:** **<ADD-YOUR-STREAMLIT-APP-URL-HERE>**
+> **Live App:** **https://2026aj05222-mlassignment2.streamlit.app/**
 
 ## f. Project Structure
 
