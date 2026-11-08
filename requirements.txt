@@ -1,0 +1,12 @@
+# Pinned for reproducible deployment on Streamlit Community Cloud.
+# scikit-learn is pinned exactly because the saved .joblib pipelines are
+# version-sensitive; loading them under a different minor version can raise
+# InconsistentVersionWarning or fail. The remaining packages use compatible
+# lower bounds so Cloud can resolve wheels for its Python runtime.
+scikit-learn==1.9.0
+streamlit>=1.40
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.8
+seaborn>=0.13
+joblib>=1.3

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# NOTE: model/ artifacts (*.joblib) and test_data.csv are intentionally
+# committed — they are required deliverables for this assignment.
