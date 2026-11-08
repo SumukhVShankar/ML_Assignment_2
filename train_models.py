@@ -58,8 +58,11 @@ RANDOM_STATE = 42
 TEST_SIZE = 0.25
 PROJECT_ROOT = Path(__file__).resolve().parent
 MODEL_DIR = PROJECT_ROOT / "model"
+DATA_DIR = PROJECT_ROOT / "data"
 TARGET_COLUMN = "diagnosis"          # 0 = malignant, 1 = benign
 TEST_DATA_PATH = PROJECT_ROOT / "test_data.csv"
+FULL_DATA_PATH = DATA_DIR / "breast_cancer_full.csv"
+TRAIN_DATA_PATH = DATA_DIR / "train_data.csv"
 METRICS_PATH = MODEL_DIR / "metrics.json"
 
 # Human-friendly key -> saved filename stem
@@ -135,6 +138,7 @@ def evaluate(pipeline: Pipeline, X_test: pd.DataFrame, y_test: pd.Series) -> dic
 
 def main() -> None:
     MODEL_DIR.mkdir(exist_ok=True)
+    DATA_DIR.mkdir(exist_ok=True)
 
     # --- Load dataset -------------------------------------------------------
     bunch = load_breast_cancer(as_frame=True)
@@ -142,6 +146,12 @@ def main() -> None:
     y = bunch.target.copy()  # 0 = malignant, 1 = benign
 
     print(f"Loaded dataset: {X.shape[0]} instances, {X.shape[1]} features.")
+
+    # --- Persist the full original dataset (reproducibility) ----------------
+    full_df = X.copy()
+    full_df[TARGET_COLUMN] = y.values
+    full_df.to_csv(FULL_DATA_PATH, index=False)
+    print(f"Wrote full dataset       -> {FULL_DATA_PATH.relative_to(PROJECT_ROOT)} ({len(full_df)} rows)")
 
     # --- Train / test split (stratified to preserve class balance) ----------
     X_train, X_test, y_train, y_test = train_test_split(
@@ -151,6 +161,12 @@ def main() -> None:
         stratify=y,
     )
     print(f"Train: {X_train.shape[0]} rows  |  Test: {X_test.shape[0]} rows")
+
+    # --- Persist the train split (companion to test_data.csv) ---------------
+    train_df = X_train.copy()
+    train_df[TARGET_COLUMN] = y_train.values
+    train_df.to_csv(TRAIN_DATA_PATH, index=False)
+    print(f"Wrote train split        -> {TRAIN_DATA_PATH.relative_to(PROJECT_ROOT)} ({len(train_df)} rows)")
 
     # --- Train, evaluate, persist each model --------------------------------
     models = build_models()

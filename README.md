@@ -37,9 +37,17 @@ compactness, concavity, concave points, symmetry, and fractal dimension.
 The dataset satisfies the assignment constraints: **30 features (≥ 12)** and
 **569 instances (≥ 500)**.
 
-**Test data:** `test_data.csv` is the held-out 25% stratified split (143 rows)
-created during training. It contains all 30 feature columns plus the
-`diagnosis` target column and is the file to upload into the Streamlit app.
+**Data files in the repository:**
+
+| File | Rows | Purpose |
+|---|---|---|
+| `data/breast_cancer_full.csv` | 569 | The complete original dataset (all instances). |
+| `data/train_data.csv` | 426 | 75% split used to fit the models. |
+| `test_data.csv` | 143 | 25% held-out split — upload this one into the Streamlit app. |
+
+All three contain the 30 feature columns plus the `diagnosis` target column.
+Per the assignment ("upload only test data"), the app is designed for
+`test_data.csv`; the full and train files are included for full reproducibility.
 
 ## c. GitHub Repository Link
 
@@ -101,6 +109,9 @@ ML_Assignment_2/
 ├── requirements.txt       # Pinned dependencies for Streamlit Cloud
 ├── README.md              # This file
 ├── test_data.csv          # Held-out test split (143 rows, 30 features + target)
+├── data/
+│   ├── breast_cancer_full.csv   # Full original dataset (569 rows)
+│   └── train_data.csv           # Training split (426 rows)
 └── model/
     ├── logistic_regression.joblib
     ├── decision_tree.joblib
